@@ -66,4 +66,16 @@ export class LoginComponent implements OnInit {
   irCampanha() {
     this.router.navigate(["/cadastro-campanha"]);
   }
+  irVoluntario() {
+    this.router.navigate(["/cadastro-voluntario"]);
+  }
+  irInstituicao() {
+    this.router.navigate(["/cadastro-instituicao"]);
+  }
+  irInstituicaoContinua(){
+    this.router.navigate(["/cadastro-instituicao-completar"]);
+  }
+  irVoluntarioContinua(){
+    this.router.navigate(["/cadastro-voluntario-completar"]);
+  }
 }

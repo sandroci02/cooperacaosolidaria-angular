@@ -68,6 +68,10 @@ import { GrupoComponent } from './component/grupo/grupo.component';
 import { GrupoModalComponent } from './component/grupo-modal/grupo-modal.component';
 import { CampanhaLayoutComponent } from './layouts/campanha-layout/campanha-layout.component';
 import { CampanhaCadastroComponent } from './component/campanha-cadastro/campanha-cadastro.component';
+import { VoluntarioCadastroComponent } from './component/voluntario-cadastro/voluntario-cadastro.component';
+import { InstituicaoCadastroComponent } from './component/instituicao-cadastro/instituicao-cadastro.component';
+import { VoluntarioContinuaCadastroComponent } from './component/voluntario-continua-cadastro/voluntario-continua-cadastro.component';
+import { InstituicaoContinuaCadastroComponent } from './component/instituicao-continua-cadastro/instituicao-continua-cadastro.component';
 
 
 registerLocaleData(localePt, 'pt-BR');
@@ -109,6 +113,22 @@ const routes: Routes = [
         component: LoginComponent
       },
       {
+        path: 'cadastro-voluntario',
+        component: VoluntarioCadastroComponent
+      },
+      {
+        path: 'cadastro-voluntario-completar',
+        component: VoluntarioContinuaCadastroComponent
+      },
+      {
+        path: 'cadastro-instituicao',
+        component: InstituicaoCadastroComponent
+      },
+      {
+        path: 'cadastro-instituicao-completar',
+        component: InstituicaoContinuaCadastroComponent
+      },
+      {
         path: 'troca-senha',
         component: TrocaSenhaComponent
       }
@@ -144,7 +164,11 @@ const routes: Routes = [
     TrocaSenhaComponent,
     GrupoComponent,
     GrupoModalComponent,
-    CampanhaCadastroComponent    
+    CampanhaCadastroComponent,
+    VoluntarioCadastroComponent,
+    InstituicaoCadastroComponent,
+    VoluntarioContinuaCadastroComponent,
+    InstituicaoContinuaCadastroComponent    
   ],
   imports: [
     RouterModule.forRoot(routes),
