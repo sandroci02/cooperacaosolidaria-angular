@@ -1,0 +1,46 @@
+<mat-dialog-content>
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar class="color-verde">
+                <i class="material-icons">edit</i>
+            </div>
+            <mat-card-title>{{acao}} Grupo</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-12">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="data.nome" placeholder="nome">
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-slide-toggle [(ngModel)]="data.ativo">Ativo</mat-slide-toggle>
+                </div>
+
+            </div>
+            <div class="col-12">
+                <mat-list>
+                    <h3 mat-subheader>Usuários</h3>
+                    <mat-list-item *ngFor="let selecao of usuarios" [ngClass]="{'zebra': $index % 2 == 0}">
+                        <div class="col-6">
+                            <mat-checkbox [(ngModel)]="selecao.selecionado" (click)="selecionar(selecao)" [disabled]="selecao.desabilitado">{{selecao.valor.nome}}
+                            </mat-checkbox>
+                        </div>
+                        <div class="col-6">
+                            <mat-chip-list *ngIf="selecao.valor.grupo">
+                                <mat-chip color="primary" selected *ngFor="let grupo of selecao.valor.grupos">{{grupo}} </mat-chip>
+                            </mat-chip-list>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" class="color-cinza">Fechar</button>
+    <button mat-button class="color-azul" (click)="salvar()">Salvar</button>
+</mat-dialog-actions>

@@ -1,0 +1,10 @@
+
+  .login {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+  }
+  .invalid-feedback{
+    color: red;    
+  }

@@ -1,0 +1,40 @@
+.toolbar-icon {
+    margin-left: 15px;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.nav-container {
+    width: 100%;
+    height: 800px;
+    ;
+    margin: 0px;
+}
+
+.mat-drawer-content.mat-sidenav-content {
+    background: #EEEEEE;
+}
+
+.mat-toolbar.mat-primary {
+    background: #1e88e5;
+    color: #fff;
+}
+
+.sidebar {
+    width: 200px;
+    background: #fff;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, .56), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+    height: 800px !important;
+}
+
+.mat-list-item {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80% !important;
+}
+
+.menu .mat-icon {
+    margin-right: 5px !important;
+}
