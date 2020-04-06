@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
-import { ParametroData } from 'src/app/model/parametroData.model';
-import { Usuario } from 'src/app/component/usuario/usuario.component';
 import { MensagemService } from 'src/app/service/mensagem.service';
 
 @Component({
@@ -13,8 +11,6 @@ import { MensagemService } from 'src/app/service/mensagem.service';
 })
 export class HomeLayoutComponent implements OnInit {
 
-  parametro: ParametroData;
-  usuario: Usuario;
   mensagens = 0;
   nome: String
 

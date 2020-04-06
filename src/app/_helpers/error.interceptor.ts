@@ -6,12 +6,10 @@ import { catchError } from 'rxjs/operators';
 import { AuthenticationService } from '../../app/_services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../service/api.service';
-import { ParametroData } from '../model/parametroData.model';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-    parametro: ParametroData;
 
     constructor(private authenticationService: AuthenticationService, private route: ActivatedRoute,
         private router: Router) { }
@@ -44,7 +42,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 
                 }
-                return throwError(error);
+                return throwError(err);
             }
 
 

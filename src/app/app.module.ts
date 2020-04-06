@@ -48,10 +48,6 @@ import {
   MatRadioModule,
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UsuarioComponent } from './component/usuario/usuario.component';
-import { UsuarioModalComponent } from './component/usuario-modal/usuario-modal.component';
-import { ReferenciaComponent } from './component/referencia/referencia.component';
-import { ReferenciaModalComponent } from './component/referencia-modal/referencia-modal.component';
 import { AguardeComponent } from './component/aguarde/aguarde.component';
 import { ConfirmacaoComponent } from './component/confirmacao/confirmacao.component';
 import { ApiService } from './service/api.service';
@@ -62,16 +58,10 @@ import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
-import { ContaComponent } from './component/conta/conta.component';
-import { TrocaSenhaComponent } from './component/troca-senha/troca-senha.component';
-import { GrupoComponent } from './component/grupo/grupo.component';
-import { GrupoModalComponent } from './component/grupo-modal/grupo-modal.component';
 import { CampanhaLayoutComponent } from './layouts/campanha-layout/campanha-layout.component';
 import { CampanhaCadastroComponent } from './component/campanha-cadastro/campanha-cadastro.component';
 import { VoluntarioCadastroComponent } from './component/voluntario-cadastro/voluntario-cadastro.component';
 import { InstituicaoCadastroComponent } from './component/instituicao-cadastro/instituicao-cadastro.component';
-import { VoluntarioContinuaCadastroComponent } from './component/voluntario-continua-cadastro/voluntario-continua-cadastro.component';
-import { InstituicaoContinuaCadastroComponent } from './component/instituicao-continua-cadastro/instituicao-continua-cadastro.component';
 
 
 registerLocaleData(localePt, 'pt-BR');
@@ -99,9 +89,6 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent
       },
-      { path: 'usuario', component: UsuarioComponent },
-      { path: 'referencia', component: ReferenciaComponent },
-      { path: 'grupo', component: GrupoComponent },                 
     ]
   },
   {
@@ -115,23 +102,11 @@ const routes: Routes = [
       {
         path: 'cadastro-voluntario',
         component: VoluntarioCadastroComponent
-      },
-      {
-        path: 'cadastro-voluntario-completar',
-        component: VoluntarioContinuaCadastroComponent
-      },
+      },     
       {
         path: 'cadastro-instituicao',
         component: InstituicaoCadastroComponent
       },
-      {
-        path: 'cadastro-instituicao-completar',
-        component: InstituicaoContinuaCadastroComponent
-      },
-      {
-        path: 'troca-senha',
-        component: TrocaSenhaComponent
-      }
     ]
   },
   {
@@ -154,21 +129,11 @@ const routes: Routes = [
     HomeLayoutComponent,
     LoginLayoutComponent,
     CampanhaLayoutComponent,
-    UsuarioComponent,
-    UsuarioModalComponent,
-    ReferenciaComponent,
-    ReferenciaModalComponent,
     AguardeComponent,
     ConfirmacaoComponent,
-    ContaComponent,
-    TrocaSenhaComponent,
-    GrupoComponent,
-    GrupoModalComponent,
     CampanhaCadastroComponent,
     VoluntarioCadastroComponent,
     InstituicaoCadastroComponent,
-    VoluntarioContinuaCadastroComponent,
-    InstituicaoContinuaCadastroComponent    
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -233,10 +198,7 @@ const routes: Routes = [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   entryComponents: [
     AguardeComponent,
-    ReferenciaModalComponent,
     ConfirmacaoComponent,
-    UsuarioModalComponent,
-    GrupoModalComponent,    
   ]
 })
 export class AppModule { }

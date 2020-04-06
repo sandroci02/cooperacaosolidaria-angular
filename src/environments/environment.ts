@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   local: true,
-  apiPrefix: 'http://arenadocker.azurewebsites.net/'
+  apiPrefix: 'https://sos-covid-backend.herokuapp.com/'
 };
 
 /*

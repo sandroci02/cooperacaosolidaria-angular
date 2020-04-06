@@ -2,12 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../../app/model/user';
 import { environment } from '../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ParametroData } from '../model/parametroData.model';
-import { PageData } from '../model/PageData.model';
-import { PageDataDot } from '../model/PageDataDot.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -44,11 +40,11 @@ export class AuthenticationService {
 
     login(username: string, password: string) {
         let   pacote = {"email": username, "password": password}
-        return this.http.post<PageDataDot>(environment.apiPrefix +'Auth/login', pacote);
+        return this.http.post<any>(environment.apiPrefix +'Auth/login', pacote);
     }
 
-    trocaSenha(parametro: ParametroData): any {
-        return this.http.post<PageData>(environment.apiPrefix + 'usuario/senha', parametro
+    trocaSenha(parametro: any): any {
+        return this.http.post<any>(environment.apiPrefix + 'usuario/senha', parametro
         );
     }
 
