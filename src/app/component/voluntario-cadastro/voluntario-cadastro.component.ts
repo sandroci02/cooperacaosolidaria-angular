@@ -59,16 +59,11 @@ export class VoluntarioCadastroComponent implements OnInit {
       ]
     }
 
-    this.service.do('user/register', envelope).subscribe(data => {
-      console.log(data);
-      if (data.success) {
-        this.mensagem.sucesso("Voluntário cadastrado com Sucesso");
-      } else {
-        this.mensagem.erro(data.message);
-      }
+    this.service.do('user/register', envelope).subscribe(data => {      
+      this.mensagem.sucesso("Voluntário cadastrado com Sucesso");      
       aguarde.close();
-    }, error => {
-      this.mensagem.erro("Não foi possível executar a ação : " + error.error.message);
+    }, cat => {
+      this.mensagem.erro("Não foi possível executar a ação : " + cat.error.error.details[0].message);
       aguarde.close();
     });
   }

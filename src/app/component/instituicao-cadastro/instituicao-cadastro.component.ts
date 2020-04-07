@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AguardeService } from '../../service/aguarde.service';
 import { ApiService } from '../../service/api.service';
 import { MensagemService } from '../../service/mensagem.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-instituicao-cadastro',
@@ -10,22 +11,11 @@ import { MensagemService } from '../../service/mensagem.service';
 })
 export class InstituicaoCadastroComponent implements OnInit {
 
-  confirmarSenha = "";
-  listaConta = []
-
-  contaGrupo = {
-    banco: "",
-    agencia: "",
-    numeroConta: "",
-    nome:"",
-    cpfCNPJ: "",
-    tipo:""
-  }
-
   data = {
     nome: "",
     email: "",
     senha: "",
+    confirmarSenha: "",
     cnpj: "",
     telefone: "",
     celular: "",
@@ -59,19 +49,47 @@ export class InstituicaoCadastroComponent implements OnInit {
     paypal: "",
     recebeAqui: "",
     vakinhaOnline: "",
+    banco: "",
+    agencia: "",
+    numeroConta: "",
+    nomeCompleto: "",
+    cpfCNPJ: "",
+    tipo: ""
   }
+
 
 
 
   constructor(private aguardeService: AguardeService, private service: ApiService, private mensagem: MensagemService) { }
 
+  clicado = 0;
   contador = 1;
 
+
+  mapErros: Map<String, any>;
+
   ngOnInit() {
+    this.mapErros = new Map();
+    this.mapErros.set("nome", this.data.nome);
+    this.mapErros.set("email", this.data.email);
+    this.mapErros.set("senha", this.data.senha);
+    this.mapErros.set("confirmarSenha", this.data.confirmarSenha);
+    this.mapErros.set("telefone", this.data.telefone);
+    this.mapErros.set("celular", this.data.celular);
+    this.mapErros.set("facebook", this.data.facebook);
+    this.mapErros.set("instagram", this.data.instagram);
+    this.mapErros.set("site", this.data.site);
+    this.mapErros.set("primeiroNomeResponsavel", this.data.primeiroNomeResponsavel);
+    this.mapErros.set("ultimoNomeResponsavel", this.data.ultimoNomeResponsavel);
+    this.mapErros.set("banco", this.data.banco);
+    this.mapErros.set("agencia", this.data.agencia);
+    this.mapErros.set("numeroConta", this.data.numeroConta);
+    this.mapErros.set("cpfCNPJ", this.data.cpfCNPJ);
+    this.mapErros.set("nomeCompleto", this.data.nomeCompleto);
   }
 
   getZona() {
-    let retorno = []    
+    let retorno = []
     if (this.data.zona.norte) {
       retorno.push("Zona norte")
     }
@@ -124,18 +142,18 @@ export class InstituicaoCadastroComponent implements OnInit {
         }
       ],
       account_bank: {
-        name_banking: this.contaGrupo.banco,
-        agency: this.contaGrupo.agencia,
-        account_number: this.contaGrupo.numeroConta,
-        name_favored: this.contaGrupo.nome,
-        cpf_cnpj: this.contaGrupo.cpfCNPJ
+        name_banking: this.data.banco,
+        agency: this.data.agencia,
+        account_number: this.data.numeroConta,
+        name_favored: this.data.nomeCompleto,
+        cpf_cnpj: this.data.cpfCNPJ
       },
       help_types: [
         /*Transferência bancária,
         Doação direta de alimentos,
         Doação de roupas*/
       ],
-      served_region: this.getZona(),    
+      served_region: this.getZona(),
       assisted_entities: [/*
            {
              name: Fernando da silva,
@@ -162,24 +180,60 @@ export class InstituicaoCadastroComponent implements OnInit {
       ]
     }
 
-    const aguarde = this.aguardeService.aguarde();
+    this.clicado++;
 
-    this.service.do('user/register', envelope).subscribe(data => {
-      console.log(data);
-      if (data.success) {
-        this.mensagem.sucesso("Voluntário cadastrado com Sucesso");
-      } else {
-        this.mensagem.erro(data.message);
+
+    this.verificaErros().subscribe(ver => {
+      console.log("verifica erros" + ver)
+      if (!ver) {
+        const aguarde = this.aguardeService.aguarde();
+
+        this.service.do('user/register', envelope).subscribe(data => {
+          this.mensagem.sucesso("Instituição cadastrada com Sucesso");
+          aguarde.close();
+        }, cat => {
+          console.log(cat.error);
+          if(cat.error.error.details){
+            this.mensagem.erro("Não foi possível executar a ação : " + cat.error.error.details[0].message);
+          }else{
+            this.mensagem.erro("Não foi possível executar a ação : " + cat.error.error);
+          }
+          aguarde.close();
+        });
       }
-      aguarde.close();
-    }, cat => {
-      this.mensagem.erro("Não foi possível executar a ação : " + cat.error.error.details[0].message);
-      aguarde.close();
     });
+
+
+
   }
 
 
   completar() {
     this.contador = 2;
+  }
+
+
+  senhaValida() {
+    return this.data.senha !== this.data.confirmarSenha;
+  }
+
+  vazio(atributo) {
+    if (this.mapErros.has(atributo)) {
+      let valor = this.data[atributo];      
+      return this.clicado > 0 && (valor === undefined || valor.length < 1);
+    }
+    return false;
+  }
+
+  verificaErros(): Observable<boolean> {
+   
+    let erro = false;
+    this.mapErros.forEach((valor: string, key: string) => {
+      console.log(key + "-> " + this.data[key].length);
+      if (this.data[key].length < 1) {
+        erro = true;
+      }
+    });
+    return of(erro);
   }
 }

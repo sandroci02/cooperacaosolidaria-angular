@@ -9,10 +9,6 @@ export class JwtInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    console.log("JwtInterceptor>>>>>>>>>>>>>");
-
-        // add authorization header with jwt token if available
         if (localStorage.getItem('token')) {
             console.log("JwtInterceptorJwtInterceptor: ", localStorage.getItem('token') )
             request = request.clone({
@@ -20,8 +16,6 @@ export class JwtInterceptor implements HttpInterceptor {
                     Authorization: "Bearer " + localStorage.getItem('token')
                 }
             });
-        }else{
-            this.authenticationService.logout();
         }
 
         return next.handle(request);
