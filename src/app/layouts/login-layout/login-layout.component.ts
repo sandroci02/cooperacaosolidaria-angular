@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-layout',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  login() {    
+    this.router.navigate(["/login"]);
+  }
+
+  irHome() {
+    this.router.navigate(["/home"]);
+  }
+
+  irCampanha() {
+    localStorage.removeItem('detalhe');        
+    this.router.navigate(["/cadastro-campanha"]);
+  }
+
+  irCadastroVoluntario() {
+    localStorage.removeItem('detalhe');        
+    this.router.navigate(["/cadastro-voluntario"]);
+  }
+
+  irCadastroInstituicao() {
+    localStorage.removeItem('detalhe');        
+    this.router.navigate(["/cadastro-instituicao"]);
   }
 
 }

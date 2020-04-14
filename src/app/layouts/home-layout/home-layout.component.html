@@ -1,26 +1,19 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-        <span>Projeto Covid</span>
-        <span class="toolbar-spacer"></span>
-        <span>{{nome}}</span>
-        <mat-icon class="toolbar-icon mouse" (click)="goDashboard()" title="Ir para Dashboard">dashboard</mat-icon>
-        <mat-icon class="toolbar-icon mouse" (click)="abrirAlertas()" title="Abrir alertas" matBadge="{{mensagens}}" matBadgeColor="accent">message</mat-icon>       
-        <mat-icon class="toolbar-icon mouse" (click)="goTrocaSenha()" title="Trocar senha">lock</mat-icon>
-        <mat-icon class="toolbar-icon mouse" (click)="logout()" title="sair">exit_to_app</mat-icon>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-sidenav-container class="nav-container menu">
-    <mat-sidenav #drawer mode="side" opened role="navigation" class="sidebar">
-        <mat-nav-list>
-            <a mat-list-item routerLink='/login' routerLinkActive="active-list-item">Login</a>
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <div class="row">
-            <router-outlet></router-outlet>
+<app-header></app-header>
+
+<div class="row">
+    <div class="col-12">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<div class="row painel">
+    <div class="col-12">
+    </div>
+</div>
+
+<div class="row ">
+    <div class="footer">
+        <div class="mat-mensagem center">
+            CONECTE-SE COM A REDE DO BEM
         </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+    </div>
+</div>

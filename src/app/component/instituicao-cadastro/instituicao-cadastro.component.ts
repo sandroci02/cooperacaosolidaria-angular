@@ -3,6 +3,7 @@ import { AguardeService } from '../../service/aguarde.service';
 import { ApiService } from '../../service/api.service';
 import { MensagemService } from '../../service/mensagem.service';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-instituicao-cadastro',
@@ -60,7 +61,7 @@ export class InstituicaoCadastroComponent implements OnInit {
 
 
 
-  constructor(private aguardeService: AguardeService, private service: ApiService, private mensagem: MensagemService) { }
+  constructor(private aguardeService: AguardeService, private service: ApiService, private mensagem: MensagemService, private router: Router) { }
 
   clicado = 0;
   contador = 1;
@@ -74,18 +75,6 @@ export class InstituicaoCadastroComponent implements OnInit {
     this.mapErros.set("email", this.data.email);
     this.mapErros.set("senha", this.data.senha);
     this.mapErros.set("confirmarSenha", this.data.confirmarSenha);
-    this.mapErros.set("telefone", this.data.telefone);
-    this.mapErros.set("celular", this.data.celular);
-    this.mapErros.set("facebook", this.data.facebook);
-    this.mapErros.set("instagram", this.data.instagram);
-    this.mapErros.set("site", this.data.site);
-    this.mapErros.set("primeiroNomeResponsavel", this.data.primeiroNomeResponsavel);
-    this.mapErros.set("ultimoNomeResponsavel", this.data.ultimoNomeResponsavel);
-    this.mapErros.set("banco", this.data.banco);
-    this.mapErros.set("agencia", this.data.agencia);
-    this.mapErros.set("numeroConta", this.data.numeroConta);
-    this.mapErros.set("cpfCNPJ", this.data.cpfCNPJ);
-    this.mapErros.set("nomeCompleto", this.data.nomeCompleto);
   }
 
   getZona() {
@@ -191,27 +180,21 @@ export class InstituicaoCadastroComponent implements OnInit {
         this.service.do('user/register', envelope).subscribe(data => {
           this.mensagem.sucesso("Instituição cadastrada com Sucesso");
           aguarde.close();
+          this.router.navigate(["/home"]);
         }, cat => {
           console.log(cat.error);
-          if(cat.error.error.details){
+          if (cat.error.error.details) {
             this.mensagem.erro("Não foi possível executar a ação : " + cat.error.error.details[0].message);
-          }else{
+          } else {
             this.mensagem.erro("Não foi possível executar a ação : " + cat.error.error);
           }
           aguarde.close();
         });
+      } else {
+        this.mensagem.erro("Verifique os campos obrigatórios");
       }
     });
-
-
-
   }
-
-
-  completar() {
-    this.contador = 2;
-  }
-
 
   senhaValida() {
     return this.data.senha !== this.data.confirmarSenha;
@@ -219,14 +202,78 @@ export class InstituicaoCadastroComponent implements OnInit {
 
   vazio(atributo) {
     if (this.mapErros.has(atributo)) {
-      let valor = this.data[atributo];      
+      let valor = this.data[atributo];
       return this.clicado > 0 && (valor === undefined || valor.length < 1);
     }
     return false;
   }
 
+  voltar() {
+    if (this.contador > 1) {
+      this.contador--;
+    }
+  }
+
+  avancar() {
+    if (this.contador === 1) {
+      this.verificaErros().subscribe(ver => {
+        if (!ver) {
+          this.contador++;
+          this.mapErros.set("telefone", this.data.telefone);
+          this.mapErros.set("celular", this.data.celular);
+          this.clicado = 0;
+        } else {
+          this.clicado = 1;
+        }
+      });
+    }
+    else if (this.contador === 2) {
+      this.verificaErros().subscribe(ver => {
+        if (!ver) {
+          this.contador++;
+          this.mapErros.set("facebook", this.data.facebook);
+          this.mapErros.set("instagram", this.data.instagram);
+          this.mapErros.set("site", this.data.site);
+          this.clicado = 0;
+        } else {
+          this.clicado = 1;
+        }
+      });
+    }
+    else if (this.contador === 3) {
+      this.verificaErros().subscribe(ver => {
+        if (!ver) {
+          this.contador++;
+          this.mapErros.set("primeiroNomeResponsavel", this.data.primeiroNomeResponsavel);
+          this.mapErros.set("ultimoNomeResponsavel", this.data.ultimoNomeResponsavel);
+          this.clicado = 0;
+        } else {
+          this.clicado = 1;
+        }
+      });
+    }
+    else if (this.contador === 4) {
+      this.verificaErros().subscribe(ver => {
+        if (!ver) {
+          this.mapErros.set("banco", this.data.banco);
+          this.mapErros.set("agencia", this.data.agencia);
+          this.mapErros.set("numeroConta", this.data.numeroConta);
+          this.mapErros.set("cpfCNPJ", this.data.cpfCNPJ);
+          this.mapErros.set("nomeCompleto", this.data.nomeCompleto);
+          this.clicado = 0;
+          this.contador++;
+        } else {
+          this.clicado = 1;
+        }
+      });
+    } else if (this.contador === 5) {
+      this.contador++;
+    }
+  }
+
+
   verificaErros(): Observable<boolean> {
-   
+
     let erro = false;
     this.mapErros.forEach((valor: string, key: string) => {
       console.log(key + "-> " + this.data[key].length);

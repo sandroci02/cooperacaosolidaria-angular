@@ -1,4 +1,24 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+.mat-toolbar.mat-primary{
+    background: #fff !important;
+    color: #000 !important;
+    padding: 30px;
+}
+.top{
+    margin-top: -15px;
+}
+
+.border{
+    border: solid 1px red;
+}
+
+.btn-header{
+    width: 200px !important;    
+    text-align: center !important;
+}
+
 [data-notify="container"][class*="alert-"] {
     background-color: #BCD7F4;
     border-width: 0px;
@@ -34,30 +54,12 @@
 [ data-notify="dismiss"] {
     right: -10px !important;
 }
-
-@media (max-width: 700px) {
-    .col-1,
-    .col-2,
-    .col-3,
-    .col-4,
-    .col-5,
-    .col-6,
-    .col-7,
-    .col-8,
-    .col-9,
-    .col-10,
-    .col-11,
-    .col-12 {
-        width: 100% !important;
-    }
-}
-
 * {
     box-sizing: border-box;
 }
 
 html {
-    background: #EEEEEE;
+    background: #fff;
 }
 
 body {
@@ -258,3 +260,197 @@ tbody {
     margin-right: auto;
     margin-top:  20px;
   }
+
+  .center{
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  .painel{
+    background-color: #EDEDED;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.painel-i{
+    background-color: #FFF;    
+}
+
+.mat-mensagem{
+    font: 400 25px/32px Roboto,"Helvetica Neue",sans-serif;
+    margin: 0 0 16px;
+}
+
+.mat-mensagem-titulo{
+    font: 500 30px/32px Roboto,"Helvetica Neue",sans-serif;
+    margin: 0 0 16px;
+    }
+ 
+.mat-mensagem-titulo2{
+    font: 600 40px/42px Roboto,"Helvetica Neue",sans-serif;
+    margin: 0 0 16px;
+}
+
+.mat-display-3, .mat-typography .mat-display-3 {
+    font: 400 56px/60px Roboto,"Helvetica Neue",sans-serif;
+    margin: 0 0 64px;
+    letter-spacing: -.02em;
+}
+.btn-vakinha{
+    background-color: #FF7978;
+    color: #fff;    
+    width: 100% !important;
+    height: 80px;
+    margin-bottom: 10px !important;
+    font: 400 20px/30px Roboto,"Helvetica Neue",sans-serif;
+}
+.mat-flat-button{
+    border-radius: 0px!important;
+}
+
+.left-10{
+    margin-left: 10px !important;
+}
+
+.footer{    
+    color: #fff;    
+    background: #404040;    
+    height: 50px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;        
+    text-align: center;
+}
+
+.footer .mat-mensagem{
+    margin-top:12px;
+}
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.campanha{
+    min-height:250px;    
+}
+
+#header-mobile{
+    display: none;
+}
+
+.toolbar-icon {
+    margin-left: 15px;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.nav-container {
+    width: 100%;
+    height: 800px;
+    ;
+    margin: 0px;
+}
+
+.mat-drawer-content.mat-sidenav-content {
+    background: #EEEEEE;
+}
+
+.mat-toolbar.mat-primary {
+    background: #1e88e5;
+    color: #fff;
+}
+
+.sidebar {
+    width: 200px;
+    background: #fff;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, .56), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+    height: 800px !important;
+}
+
+.mat-list-item {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80% !important;
+}
+
+.menu .mat-icon {
+    margin-right: 5px !important;
+}
+
+
+
+
+@media (max-width: 600px) {    
+    .col-1,
+    .col-2,
+    .col-3,
+    .col-4,
+    .col-5,
+    .col-6,
+    .col-7,
+    .col-8,
+    .col-9,
+    .col-10,
+    .col-11,
+    .col-12 {
+        width: 100% !important;
+    }
+    .row::after{
+        width: 98% !important;
+    }
+
+    .mat-display-3, .mat-typography .mat-display-3{
+        font: 400 20px/30px Roboto,"Helvetica Neue",sans-serif;
+        margin: 0 0 64px;
+        letter-spacing: -.02em;
+    }
+
+    .mat-mensagem-titulo {
+        font: 500 25px/30px Roboto,"Helvetica Neue",sans-serif;
+        margin: 0 0 16px;
+    }
+    .mat-mensagem-titulo2{
+        font: 500 25px/30px Roboto,"Helvetica Neue",sans-serif;
+        margin: 0 0 16px;
+    }
+    .painel {
+        background-color: #EDEDED;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }   
+    .footer {
+        color: #fff;
+        background: #404040;
+        height: 50px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+    }
+    .footer .mat-mensagem {        
+        font: 400 20px/25px Roboto,"Helvetica Neue",sans-serif;        
+    }
+
+    #banner {
+        max-width:350px;        
+    }
+    #header{
+        display: none!important;
+    }
+    #header-mobile{
+        display: block;
+    }
+    .btn-header{
+        width: 100px !important;    
+        text-align: center !important;
+    }
+    
+}
+

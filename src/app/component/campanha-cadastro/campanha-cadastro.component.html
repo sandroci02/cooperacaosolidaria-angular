@@ -1,260 +1,390 @@
-<mat-card>
-  <h2>{{contador}} de 6</h2>
-</mat-card>
+<div *ngIf="erroLogin" class="painel">
+  <h2 class="mat-mensagem-titulo">Por favor faça o login <button mat-flat-button class="btn-header" (click)="login()">
+      Login
+    </button></h2>
 
-<section *ngIf="contador == 1">
+</div>
 
+
+
+<div *ngIf="!erroLogin" class="painel">
+  <h2 class="mat-mensagem-titulo">Cadastro de campanha {{contador}} de 5</h2>
+</div>
+<div *ngIf="!erroLogin">
+  <section *ngIf="contador == 1">
+    <mat-card>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field>
+              <mat-label>Data Início</mat-label>
+              <input matInput [matDatepicker]="dp3" [(ngModel)]="data.dataInicio" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field>
+              <mat-label>Data Final</mat-label>
+              <input matInput [matDatepicker]="dp4" [(ngModel)]="data.dataFinal" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+              <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-12">
+            <mat-form-field>
+              <input matInput [(ngModel)]="data.nome" placeholder="Nome da campanha" maxlength="50">
+            </mat-form-field>
+            <mat-error *ngIf="vazio('nome')">
+              O nome é obrigatório
+            </mat-error>
+          </div>
+          <div class="col-12">
+            <mat-form-field>
+              <textarea matInput [(ngModel)]="data.descricao" placeholder="Descreva sua campanha" maxlength="200"></textarea>
+            </mat-form-field>
+            <label>Informe os motivos que levaram a esta campanha, qual o problema pretende ajudar a resolver. Quem
+              pretende ajudar, Ong comunidades, etc.... E quais objetivos pretende atingir.</label>
+            <mat-error *ngIf="vazio('descricao')">
+              A descrição é obrigatório
+            </mat-error>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+
+  <section *ngIf="contador == 2">
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Principal beneficiado com a campanha</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <mat-radio-group [(ngModel)]="data.beneficiario">
+              <mat-radio-button class="example-margin" value="Médicos e Enfermeiros">Médicos e Enfermeiros
+              </mat-radio-button><br><br>
+              <mat-radio-button class="example-margin" value="Idosos">Idosos</mat-radio-button><br><br>
+              <mat-radio-button class="example-margin" value="Moradores em situação de rua">Moradores em situação de rua
+              </mat-radio-button><br><br>
+              <mat-radio-button class="example-margin" value="ONG ou Entidades assistenciais">ONG ou Entidades assistenciais
+              </mat-radio-button><br><br>
+              <mat-radio-button class="example-margin" value="Familias de baixa renda">Familias de baixa renda</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-error *ngIf="vazio('beneficiario')">
+            Principal beneficiado com a campanha é obrigatório
+          </mat-error>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Doações que a campanha aceita</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.epis" (change)="aceitaClique($event,'EPIs')">
+              EPIs</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.respiradores"
+              (change)="aceitaClique($event,'Respiradores')">Respiradores</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.leitos"
+              (change)="aceitaClique($event,'Leitos')">Leitos</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.alcoolGel"
+              (change)="aceitaClique($event,'Alcool Gel')">Alcool Gel</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.cestasBasicas"
+              (change)="aceitaClique($event,'Cestas Básicas')">Cestas Básicas</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.alimentos"
+              (change)="aceitaClique($event,'Alimentos')">Alimentos</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.itensHigiene"
+              (change)="aceitaClique($event,'Itens de higiene de pessoal')">Itens de higiene de pessoal
+            </mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.materiaisLimpeza"
+              (change)="aceitaClique($event,'Materiais de Limpeza')">Materiais de Limpeza
+            </mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.roupas"
+              (change)="aceitaClique($event,'Roupas')">Roupas</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="aceitaGrupo.fraldasGeriatricas"
+              (change)="aceitaClique($event,'Fraldas Geriátricas')">Fraldas Geriátricas
+            </mat-checkbox><br><br>
+          </div>
+          <mat-error *ngIf="erroAceitaGrupo">
+            A Doações que a campanha aceita é obrigatório
+          </mat-error>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+  <section *ngIf="contador == 3">
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Regiões onde ocorrerá</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Estado</mat-label>
+              <mat-select [(ngModel)]="data.estado">
+                <mat-option *ngFor="let estado of estados" [value]="estado.nome">
+                  {{estado.nome}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-error *ngIf="vazio('estado')">
+              O estado é obrigatório
+            </mat-error>
+          </div>
+
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Cidade</mat-label>
+              <mat-select [(ngModel)]="data.cidade">
+                <mat-option *ngFor="let cidade of getCidades(data.estado)" [value]="cidade">
+                  {{cidade}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-error *ngIf="vazio('cidade')">
+              A cidade é obrigatório
+            </mat-error>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.norte" (change)="zonaClique($event,'norte')">
+              Zona norte</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.sul" (change)="zonaClique($event,'sul')">Zona
+              sul</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.central"
+              (change)="zonaClique($event,'central')">Zona central</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.leste" (change)="zonaClique($event,'leste')">
+              Zona leste</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.oeste" (change)="zonaClique($event,'oeste')">
+              Zona oeste</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.rural" (change)="zonaClique($event,'rural')">
+              Área rural</mat-checkbox><br><br>
+          </div>
+          <mat-error *ngIf="erroZonaGrupo">
+            A Zona é obrigatória
+          </mat-error>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+  <section *ngIf="contador == 4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Meios de pagamento padrão</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <mat-checkbox class="example-margin" [(ngModel)]="pagamentoGrupo.pagseguro"
+              (change)="pagamentoClique($event,'pagseguro')">Link de pgto do PAGSEGURO
+            </mat-checkbox>
+            <div [hidden]="!pagamentoGrupo.pagseguro">
+              <mat-form-field>
+                <input matInput [(ngModel)]="pagamentos.pagseguro" placeholder="Link">
+              </mat-form-field>
+              <mat-error *ngIf="!pagamentos.pagseguro">
+                o Link é obrigatório
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-12">
+            <mat-checkbox class="example-margin" [(ngModel)]="pagamentoGrupo.mercadopago"
+              (change)="pagamentoClique($event,'mercadopago')">Link de pgto do MERCADO PAGO
+            </mat-checkbox>
+            <div [hidden]="!pagamentoGrupo.mercadopago">
+              <mat-form-field>
+                <input matInput [(ngModel)]="pagamentos.mercadopago" placeholder="Link">
+              </mat-form-field>
+              <mat-error *ngIf="!pagamentos.mercadopago">
+                o Link é obrigatório
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-12">
+            <mat-checkbox class="example-margin" [(ngModel)]="pagamentoGrupo.paypal"
+              (change)="pagamentoClique($event,'paypal')">Link de pgto do PAYPAL</mat-checkbox>
+            <div [hidden]="!pagamentoGrupo.paypal">
+              <mat-form-field>
+                <input matInput [(ngModel)]="pagamentos.paypal" placeholder="Link">
+              </mat-form-field>
+              <mat-error *ngIf="!pagamentos.paypal">
+                o Link é obrigatório
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-12">
+            <mat-checkbox class="example-margin" [(ngModel)]="pagamentoGrupo.recebeaqui"
+              (change)="pagamentoClique($event,'recebeaqui')">Link de pgto do RECEBE AQUI
+            </mat-checkbox>
+            <div [hidden]="!pagamentoGrupo.recebeaqui">
+              <mat-form-field>
+                <input matInput [(ngModel)]="pagamentos.recebeaqui" placeholder="Link">
+              </mat-form-field>
+              <mat-error *ngIf="!pagamentos.recebeaqui">
+                o Link é obrigatório
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-12">
+            <mat-checkbox class="example-margin" [(ngModel)]="pagamentoGrupo.vakinhaonline"
+              (change)="pagamentoClique($event,'vakinhaonline')">Link da VAKINHA ONLINE
+            </mat-checkbox>
+            <div [hidden]="!pagamentoGrupo.vakinhaonline">
+              <mat-form-field>
+                <input matInput [(ngModel)]="pagamentos.vakinhaonline" placeholder="Link">
+              </mat-form-field>
+              <mat-error *ngIf="!pagamentos.vakinhaonline">
+                o Link é obrigatório
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-12">
+            <mat-checkbox class="example-margin" [(ngModel)]="pagamentoGrupo.deposito"
+              (change)="pagamentoClique($event,'deposito')">Será depósito ou transferência
+            </mat-checkbox>
+          </div>
+          <mat-error *ngIf="erroPagamentoGrupo">
+            O Meio de pagamento é obrigatório
+          </mat-error>
+          <mat-error *ngIf="erroConta">
+            Dados bancários devem ser preenchidos (depósito selecionado)
+          </mat-error>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+  <section *ngIf="pagamentoGrupo.deposito && contador == 4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Dados para depósito ou transferência</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field>
+              <input matInput [(ngModel)]="data.banco" placeholder="Banco*" maxlength="30">
+            </mat-form-field>
+            <mat-error *ngIf="erroBanco">
+              O Banco é obrigatório
+            </mat-error>
+          </div>
+          <div class="col-6">
+            <mat-form-field>
+              <input matInput [(ngModel)]="data.agencia" placeholder="Agência*" maxlength="20">
+            </mat-form-field>
+            <mat-error *ngIf="erroAgencia">
+              A Agência é obrigatória
+            </mat-error>
+          </div>
+          <div class="col-6">
+            <mat-form-field>
+              <input matInput [(ngModel)]="data.contaCorrente" placeholder="Conta*" maxlength="20">
+            </mat-form-field>
+            <mat-error *ngIf="erroConta">
+              A Conta é obrigatória
+            </mat-error>
+          </div>
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Tipo</mat-label>
+              <mat-select [(ngModel)]="tipo">
+                <mat-option value="Fisica">Fisica</mat-option>
+                <mat-option value="Juridica">Juridica</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6" *ngIf="tipo === 'Juridica'">
+            <mat-form-field>
+              <input [textMask]="cnpj" matInput [(ngModel)]="data.cpf" placeholder="CNPJ*">
+            </mat-form-field>
+            <mat-error *ngIf="erroCpf">
+              O CNPJ é obrigatório
+            </mat-error>
+            <mat-error *ngIf="erroCnpjInvalido">
+              O CNPJ deve ser válido
+            </mat-error>
+
+          </div>
+          <div class="col-6" *ngIf="tipo === 'Fisica'">
+            <mat-form-field>
+              <input [textMask]="cpf" matInput [(ngModel)]="data.cpf" placeholder="CPF*">
+            </mat-form-field>
+            <mat-error *ngIf="erroCpf">
+              O CPF é obrigatório
+            </mat-error>
+            <mat-error *ngIf="erroCpfInvalido">
+              O CPF deve ser válido
+            </mat-error>
+
+          </div>
+          <div class="col-12">
+            <mat-form-field>
+              <input matInput [(ngModel)]="data.nomeConta" placeholder="Nome conta*" maxlength="50">
+            </mat-form-field>
+            <mat-error *ngIf="erroNomeConta">
+              O Nome da conta é obrigatório
+            </mat-error>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+  <section *ngIf="contador == 5">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Ponto de coleta</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <mat-radio-group [(ngModel)]="data.coleta">
+              <mat-radio-button class="example-margin" value="busca_doacao">A campanha vai até a casa do doador buscar a
+                doação
+              </mat-radio-button><br><br>
+              <mat-radio-button class="example-margin" value="ponto_de_coleta">Levar doação no Ponto de coleta
+              </mat-radio-button><br><br>
+            </mat-radio-group>
+          </div>
+          <div class="col-12" *ngIf="data.coleta === 'ponto_de_coleta'">
+            <mat-form-field>
+              <input matInput [(ngModel)]="data.pontoColeta" placeholder="Endereço" maxlength="100">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+  <br>
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>Cadastro de campanha</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="data.nome" placeholder="Nome da campanha">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <textarea matInput [(ngModel)]="data.descricao" placeholder="Descreva sua campanha"></textarea>
-          </mat-form-field>
-          <label>Informe os motivos que levaram a esta campanha, qual o problema pretende ajudar a resolver. Quem
-            pretende ajudar, Ong comunidades, etc.... E quais objetivos pretende atingir.</label>
-        </div>
-      </div>
-    </mat-card-content>
+    <button mat-button class="color-cinza" (click)="voltar()">Anterior</button>
+    <button mat-button class="color-verde left-10" (click)="concluir()" *ngIf="contador === 5">Concluir</button>
+    <button mat-button class="color-verde left-10" (click)="avancar()" *ngIf="contador !== 5">Próximo</button>
   </mat-card>
-
-</section>
-
-
-<section *ngIf="contador == 2">
-
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Principal beneficiado com a campanha</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-12">
-          <mat-radio-group [(ngModel)]="data.beneficiario">
-            <mat-radio-button class="example-margin" value="medicos_enfermeiros">Médicos e Enfermeiros
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="idosos">Idosos</mat-radio-button>
-            <mat-radio-button class="example-margin" value="moradores_rua">Moradores em situação de rua
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="ong_entidades">ONG ou Entidades assistenciais
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="baixa_renda">Familias de baixa renda</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Doações que a campanha aceita</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-12">
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.epis">EPIs</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.respidradores">Respiradores</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.leitos">Leitos</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.alcoolGel">Alcool Gel</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.cestasBasicas">Cestas Básicas</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.alimentos">Alimentos</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.itensHigiene">Itens de higiene de pessoal
-          </mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.materiaisLimpeza">Materiais de Limpeza
-          </mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.roupas">Roupas</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.aceita.fraldasGeriatricas">Fraldas Geriátricas
-          </mat-checkbox>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-</section>
-
-<section *ngIf="contador == 3">
-
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Regiões onde ocorrerá</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="data.estado" placeholder="Estado">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="data.cidade" placeholder="cidade">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <mat-checkbox class="example-margin" [(ngModel)]="data.zona.norte">Zona norte</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.zona.sul">Zona sul</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.zona.central">Zona central</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.zona.leste">Zona leste</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.zona.oeste">Zona oeste</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.zona.rural">Área rural</mat-checkbox>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-</section>
-
-<section *ngIf="contador == 4">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Meios de pagamento padrão</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-12">
-          <mat-checkbox class="example-margin" [(ngModel)]="data.pagto.pagseguro">Link de pgto do PAGSEGURO
-          </mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.pagto.mercadopago">Link de pgto do MERCADO PAGO
-          </mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.pagto.paypal">Link de pgto do PAYPAL</mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.pagto.recebeaqui">Link de pgto do RECEBE AQUI
-          </mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="data.pagto.vakinhaonline">Link da VAKINHA ONLINE
-          </mat-checkbox>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-</section>
-
-<section *ngIf="contador == 5">
-
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Dados para depósito ou transferência</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="contaGrupo.banco" placeholder="Banco">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="contaGrupo.agencia" placeholder="Agência">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="contaGrupo.contaCorrente" placeholder="Conta corrente">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="contaGrupo.cpf" placeholder="CPF">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="contaGrupo.nome" placeholder="Nome">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <button mat-button class="color-1" (click)="adicionarConta()">Adiconar dados bancários</button>
-        </div>
-      </div>
-      <mat-list>
-        <div mat-subheader>Dados bancários adicionados</div>
-        <mat-list-item *ngIf="listaConta?.length == 0">
-          Não há dados bancários adicionados
-        </mat-list-item>
-        <mat-list-item *ngFor="let col of listaConta">
-          <div mat-line>{{col.banco}} {{col.agencia}} - {{col.contaCorrente}} - {{col.nome}} CPF ( {{col.cpf}} ) </div>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
-
-</section>
-
-<section *ngIf="contador == 6">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Pontos de coleta</mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="coletaGrupo.logradouro" placeholder="Rua/Avenida">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="coletaGrupo.numero" placeholder="Número">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="coletaGrupo.complemento" placeholder="Complemento">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="coletaGrupo.bairro" placeholder="Bairro">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <mat-form-field>
-            <input matInput [(ngModel)]="coletaGrupo.municipio" placeholder="Município">
-          </mat-form-field>
-        </div>
-        <div class="col-12">
-          <button mat-button class="color-1" (click)="adicionarColeta()">Adiconar</button>
-        </div>
-      </div>
-
-      <mat-list>
-        <div mat-subheader>Pontos de coletas adicionados</div>
-        <mat-list-item *ngIf="listaColeta?.length == 0">
-          Não há pontos adicionados
-        </mat-list-item>
-        <mat-list-item *ngFor="let col of listaColeta">
-          <div mat-line>{{col.logradouro}} {{col.numero}},{{col.complemento}} - {{col.bairro}} {{col.municipio}} </div>
-        </mat-list-item>
-      </mat-list>
-
-      <button mat-button class="color-verde" (click)="concluir()">Concluir</button>
-
-    </mat-card-content>
-  </mat-card>
-
-</section>
-
-<mat-card>
-  <button mat-button class="color-cinza" (click)="voltar()">Anterior</button>
-  <button mat-button class="color-verde" (click)="avancar()">Próximo</button>
-</mat-card>
-
-<code>
-  {{data | json}}
-</code>
+</div>

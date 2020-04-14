@@ -58,10 +58,15 @@ import { AuthenticationService } from './_services/authentication.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
-import { CampanhaLayoutComponent } from './layouts/campanha-layout/campanha-layout.component';
 import { CampanhaCadastroComponent } from './component/campanha-cadastro/campanha-cadastro.component';
 import { VoluntarioCadastroComponent } from './component/voluntario-cadastro/voluntario-cadastro.component';
 import { InstituicaoCadastroComponent } from './component/instituicao-cadastro/instituicao-cadastro.component';
+import { HomeComponent } from './component/home/home.component';
+import { DetalheComponent } from './component/detalhe/detalhe.component';
+import { HeaderComponent } from './component/header/header.component';
+import { SimplesCadastroComponent } from './component/simples-cadastro/simples-cadastro.component';
+
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 registerLocaleData(localePt, 'pt-BR');
@@ -84,11 +89,35 @@ const routes: Routes = [
     path: '',
     component: HomeLayoutComponent,
     children: [
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'detalhe',
+        component: DetalheComponent
+      },
+      {
+        path: 'cadastro',
+        component: SimplesCadastroComponent
+      },
+      /*{
+        path: 'cadastro-voluntario',
+        component: VoluntarioCadastroComponent
+      },     
+      {
+        path: 'cadastro-instituicao',
+        component: InstituicaoCadastroComponent
+      },*/
       {
         path: 'dashboard',
         component: DashboardComponent
       },
+      {
+        path: 'cadastro-campanha',
+        component: CampanhaCadastroComponent
+      },       
     ]
   },
   {
@@ -99,26 +128,8 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent
       },
-      {
-        path: 'cadastro-voluntario',
-        component: VoluntarioCadastroComponent
-      },     
-      {
-        path: 'cadastro-instituicao',
-        component: InstituicaoCadastroComponent
-      },
     ]
   },
-  {
-    path: '',
-    component: CampanhaLayoutComponent,
-    children: [      
-      {
-        path: 'cadastro-campanha',
-        component: CampanhaCadastroComponent
-      },       
-    ]
-  },  
 ];
 
 @NgModule({
@@ -128,12 +139,15 @@ const routes: Routes = [
     LoginComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
-    CampanhaLayoutComponent,
     AguardeComponent,
     ConfirmacaoComponent,
     CampanhaCadastroComponent,
     VoluntarioCadastroComponent,
     InstituicaoCadastroComponent,
+    HomeComponent,
+    DetalheComponent,
+    HeaderComponent,
+    SimplesCadastroComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -183,7 +197,8 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatChipsModule,
     MatBadgeModule,
-    MatRadioModule
+    MatRadioModule,
+    TextMaskModule 
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   local: true,
-  apiPrefix: 'https://sos-covid-backend.herokuapp.com/'
+  /*apiPrefix: 'https://sos-covid-backend.herokuapp.com/'*/
+  apiPrefix: 'https://coopsolidaria.herokuapp.com/'
 };
 
 /*

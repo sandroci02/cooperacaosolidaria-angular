@@ -52,30 +52,22 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
-          localStorage.setItem('token', '' + data.data.token);
-          localStorage.setItem("nome", data.data.usuarioLogado.nome)
-          this.router.navigate(["/dashboard"]);
+          localStorage.setItem('token', '' + data.token);
+          localStorage.setItem("nome", data.first_name + " " + data.last_name)
+          this.router.navigate(["/home"]);
         },
-        error => {
-          console.log("erro", error)
-          this.error = error;
-          this.loading = false;
-        });
+       cat => {
+        this.loading = false;
+        console.log(cat.error);
+        this.error = "Usuário e Senha não encontrados";
+      });
   }
 
-  irCampanha() {
-    this.router.navigate(["/cadastro-campanha"]);
-  }
   irVoluntario() {
     this.router.navigate(["/cadastro-voluntario"]);
   }
   irInstituicao() {
     this.router.navigate(["/cadastro-instituicao"]);
   }
-  irInstituicaoContinua(){
-    this.router.navigate(["/cadastro-instituicao-completar"]);
-  }
-  irVoluntarioContinua(){
-    this.router.navigate(["/cadastro-voluntario-completar"]);
-  }
+
 }

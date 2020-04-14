@@ -15,18 +15,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         private router: Router) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(err => {
-            if (err.status === 401 || err.status === 403) {
-                this.authenticationService.logout();
-                //this.router.navigate(["/login"]);
-
-                return throwError("Não autorizado");
-
-            } else {
+        return next.handle(request).pipe(catchError(err => {            
                 return throwError(err);
             }
-
-
-        }))
+        ))
     }
 }

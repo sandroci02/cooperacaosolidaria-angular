@@ -40,7 +40,7 @@ export class AuthenticationService {
 
     login(username: string, password: string) {
         let   pacote = {"email": username, "password": password}
-        return this.http.post<any>(environment.apiPrefix +'Auth/login', pacote);
+        return this.http.post<any>(environment.apiPrefix +'session', pacote);
     }
 
     trocaSenha(parametro: any): any {
@@ -50,7 +50,9 @@ export class AuthenticationService {
 
     logout() {
         localStorage.removeItem('token');
-        localStorage.removeItem('usuario');
+        localStorage.removeItem('usuario');        
+        localStorage.removeItem('nome');        
+        localStorage.removeItem('detalhe');        
         this.router.navigate(["/login"]);
     }
 }
