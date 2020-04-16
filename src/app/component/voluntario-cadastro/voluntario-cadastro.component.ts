@@ -51,7 +51,7 @@ export class VoluntarioCadastroComponent implements OnInit {
 
 
     this.verificaErros().subscribe(ver => {
-      console.log("verifica erros" + ver)
+      //console.log("verifica erros" + ver)
       if (!ver) {
         const aguarde = this.aguardeService.aguarde();
 
@@ -129,7 +129,7 @@ export class VoluntarioCadastroComponent implements OnInit {
 
     let erro = false;
     this.mapErros.forEach((valor: string, key: string) => {
-      console.log(key + "-> " + this.data[key].length);
+      //console.log(key + "-> " + this.data[key].length);
       if (this.data[key].length < 1) {
         erro = true;
       }

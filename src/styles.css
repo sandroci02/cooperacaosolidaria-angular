@@ -383,7 +383,10 @@ tbody {
     margin-right: 5px !important;
 }
 
-
+.br-mob{
+    display: none;
+    height: 0px;
+}
 
 
 @media (max-width: 600px) {    
@@ -412,19 +415,27 @@ tbody {
     }
 
     .mat-mensagem-titulo {
-        font: 500 25px/30px Roboto,"Helvetica Neue",sans-serif;
+        font: 500 20px/30px Roboto,"Helvetica Neue",sans-serif;
         margin: 0 0 16px;
     }
     .mat-mensagem-titulo2{
-        font: 500 25px/30px Roboto,"Helvetica Neue",sans-serif;
+        font: 500 20px/30px Roboto,"Helvetica Neue",sans-serif;
         margin: 0 0 16px;
     }
-    .painel {
-        background-color: #EDEDED;
+    .mat-mensagem{
+        font: 500 19px/25px Roboto,"Helvetica Neue",sans-serif;
+        margin: 0 0 16px;
+    }
+
+    [data-notify="container"][class*="alert-"] {       
+        max-width: 330px!important;
+    }
+    .painel {        
         padding-left: 0px;
         padding-right: 0px;
-        padding-top: 5px;
+        padding-top: 12px;
         padding-bottom: 5px;
+        text-align: center !important;
     }   
     .footer {
         color: #fff;
@@ -445,6 +456,9 @@ tbody {
         display: none!important;
     }
     #header-mobile{
+        display: block;
+    }
+    .br-mob{
         display: block;
     }
     .btn-header{

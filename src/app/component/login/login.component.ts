@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           localStorage.setItem('token', '' + data.token);
           localStorage.setItem("nome", data.first_name + " " + data.last_name)
           this.router.navigate(["/home"]);

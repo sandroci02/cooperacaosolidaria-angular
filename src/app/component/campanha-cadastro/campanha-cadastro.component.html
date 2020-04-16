@@ -1,7 +1,5 @@
 <div *ngIf="erroLogin" class="painel">
-  <h2 class="mat-mensagem-titulo">Por favor faça o login <button mat-flat-button class="btn-header" (click)="login()">
-      Login
-    </button></h2>
+  <h2 class="mat-mensagem-titulo">Por favor faça o login </h2>
 
 </div>
 
@@ -18,7 +16,7 @@
           <div class="col-3">
             <mat-form-field>
               <mat-label>Data Início</mat-label>
-              <input matInput [matDatepicker]="dp3" [(ngModel)]="data.dataInicio" disabled>
+              <input matInput [matDatepicker]="dp3" [(ngModel)]="data.incio" disabled [min]="minDate">
               <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
               <mat-datepicker #dp3 disabled="false"></mat-datepicker>
             </mat-form-field>
@@ -26,7 +24,7 @@
           <div class="col-3">
             <mat-form-field>
               <mat-label>Data Final</mat-label>
-              <input matInput [matDatepicker]="dp4" [(ngModel)]="data.dataFinal" disabled>
+              <input matInput [matDatepicker]="dp4" [(ngModel)]="data.final" disabled [min]="data.incio">
               <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
               <mat-datepicker #dp4 disabled="false"></mat-datepicker>
             </mat-form-field>
@@ -137,7 +135,7 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Estado</mat-label>
-              <mat-select [(ngModel)]="data.estado">
+              <mat-select [(ngModel)]="data.estado" disableOptionCentering>
                 <mat-option *ngFor="let estado of estados" [value]="estado.nome">
                   {{estado.nome}}
                 </mat-option>
@@ -151,7 +149,7 @@
           <div class="col-6">
             <mat-form-field>
               <mat-label>Cidade</mat-label>
-              <mat-select [(ngModel)]="data.cidade">
+              <mat-select [(ngModel)]="data.cidade" disableOptionCentering>
                 <mat-option *ngFor="let cidade of getCidades(data.estado)" [value]="cidade">
                   {{cidade}}
                 </mat-option>
@@ -164,17 +162,17 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.norte" (change)="zonaClique($event,'norte')">
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.norte" (change)="zonaClique($event,' Zona Norte')">
               Zona norte</mat-checkbox><br><br>
-            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.sul" (change)="zonaClique($event,'sul')">Zona
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.sul" (change)="zonaClique($event,' Zona Sul')">Zona
               sul</mat-checkbox><br><br>
             <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.central"
-              (change)="zonaClique($event,'central')">Zona central</mat-checkbox><br><br>
-            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.leste" (change)="zonaClique($event,'leste')">
+              (change)="zonaClique($event,' Zona Central')">Zona central</mat-checkbox><br><br>
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.leste" (change)="zonaClique($event,' Zona Leste')">
               Zona leste</mat-checkbox><br><br>
-            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.oeste" (change)="zonaClique($event,'oeste')">
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.oeste" (change)="zonaClique($event,' Zona Oeste')">
               Zona oeste</mat-checkbox><br><br>
-            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.rural" (change)="zonaClique($event,'rural')">
+            <mat-checkbox class="example-margin" [(ngModel)]="zonaGrupo.rural" (change)="zonaClique($event,' Área Rural')">
               Área rural</mat-checkbox><br><br>
           </div>
           <mat-error *ngIf="erroZonaGrupo">
@@ -364,8 +362,8 @@
         <div class="row">
           <div class="col-12">
             <mat-radio-group [(ngModel)]="data.coleta">
-              <mat-radio-button class="example-margin" value="busca_doacao">A campanha vai até a casa do doador buscar a
-                doação
+              <mat-radio-button class="example-margin" value="busca_doacao"><div>A campanha vai até a casa do <span class="br-mob">&nbsp;</span>doador buscar a
+                doação</div>
               </mat-radio-button><br><br>
               <mat-radio-button class="example-margin" value="ponto_de_coleta">Levar doação no Ponto de coleta
               </mat-radio-button><br><br>

@@ -25,13 +25,9 @@ export class MensagemService {
           from: from,
           align: align
         },
-        template: '<div data-notify="container" class="col-6 alert alert-{0} alert-with-icon" role="alert">' +
-          '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+        template: '<div data-notify="container" class="toast-m col-6 alert alert-{0} alert-with-icon" role="alert">' +          
           '<i class="material-icons" data-notify="icon">'+ data.icone +'</i> ' +
-          '<span data-notify="message">{2}</span>' +
-          '<div class="progress" data-notify="progressbar">' +
-          '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-          '</div>' +
+          '<span data-notify="message">{2}</span>' +          
           '<a href="{3}" target="{4}" data-notify="url"></a>' +
           '</div>'
       });

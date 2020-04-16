@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./campanha-cadastro.component.css']
 })
 export class CampanhaCadastroComponent implements OnInit {
-
-
+  
+  minDate = new Date();
   aceitaGrupo: Map<String, boolean>;
 
   zonaGrupo: Map<String, boolean>;
@@ -97,7 +97,7 @@ export class CampanhaCadastroComponent implements OnInit {
       this.erroLogin = true;
     } else {
       let email = tokenInfo.email;
-      console.log(tokenInfo);
+      //console.log(tokenInfo);
       this.data.email = email
 
 
@@ -154,7 +154,7 @@ export class CampanhaCadastroComponent implements OnInit {
       aguarde.close();
       this.router.navigate(["/home"]);
     }, cat => {
-      console.log(cat.error);
+      //console.log(cat.error);
       if (cat.error.error.details) {
         this.mensagem.erro("Não foi possível executar a ação : " + cat.error.error.details[0].message);
       } else {
@@ -192,12 +192,14 @@ export class CampanhaCadastroComponent implements OnInit {
         this.contador++;
         this.clicado = 0;
       }
+
+
     }
     else if (this.contador === 2) {
 
       let nenhum = true;
       this.aceitaGrupo.forEach((valor: boolean, key: string) => {
-        console.log(key + "-> " + valor);
+        //console.log(key + "-> " + valor);
         if (valor) {
           nenhum = false;
         }
@@ -218,7 +220,7 @@ export class CampanhaCadastroComponent implements OnInit {
 
       let nenhum = true;
       this.zonaGrupo.forEach((valor: boolean, key: string) => {
-        console.log(key + "-> " + valor);
+        //console.log(key + "-> " + valor);
         if (valor) {
           nenhum = false;
         }
@@ -236,7 +238,7 @@ export class CampanhaCadastroComponent implements OnInit {
       }
     }
     else if (this.contador === 4) {
-      console.log(this.pagamentoGrupo);
+      //console.log(this.pagamentoGrupo);
       let nenhum = true;
       let erro = false;
       let deposito = false;
@@ -383,7 +385,7 @@ export class CampanhaCadastroComponent implements OnInit {
 
     let erro = false;
     this.mapErros.forEach((valor: string, key: string) => {
-      console.log(key + "-> " + this.data[key].length);
+      //console.log(key + "-> " + this.data[key].length);
       if (this.data[key].length < 1) {
         erro = true;
       }
@@ -391,15 +393,14 @@ export class CampanhaCadastroComponent implements OnInit {
     return of(erro);
   }
 
-
   public cpf = {
-    guide: true,
+    guide: false,
     showMask: true,
     mask: [/[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/]
   };
 
   public cnpj = {
-    guide: true,
+    guide: false,
     showMask: true,
     mask: [/[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '/', /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/]
   };

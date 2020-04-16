@@ -20,11 +20,11 @@ export class AuthenticationService {
     private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
     get isLoggedIn() {
-        console.log("verificando lagado");
+       // console.log("verificando lagado");
 
         var count = localStorage.length;// get count
 
-        console.log(count);
+        //console.log(count);
 
         if (count > 0 && localStorage.get('token')) {
             this.loggedIn.next(true);
