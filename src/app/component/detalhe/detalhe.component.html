@@ -1,0 +1,88 @@
+<div class="row painel">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="mat-display-3 center">
+      {{cortaPlavra(detalhe.campaign_name,30)}}</div>
+  </div>
+  <div class="col-1"></div>
+</div>
+
+<div class="row painel-i">
+  <div class="col-8">
+    <div class="col-12">
+      <div class="mat-mensagem">        
+        {{cortaPlavra(detalhe.description,30)}}        
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mat-mensagem">Ajuda para {{detalhe.assisted_entity}}</div>
+    </div>
+    <div class="col-12">
+      <div class="mat-mensagem">Em {{detalhe.city}}, {{detalhe.state}} </div>
+    </div>
+    <div class="col-12">
+      <div class="mat-mensagem"> {{detalhe.served_region}}</div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="mat-mensagem center">
+      AJUDAR COM DINHEIRO
+    </div>
+    <div class="col-12">
+      <button mat-flat-button class="btn-vakinha" (click)="ir(detalhe.donate_channels[0].vakinhaonline)"
+        *ngIf="detalhe.donate_channels[0]?.vakinhaonline">
+        Vakinha
+      </button>
+      <button mat-flat-button class="btn-vakinha" (click)="ir(detalhe.donate_channels[0].pagseguro)"
+        *ngIf="detalhe.donate_channels[0]?.pagseguro">
+        PagSeguro
+      </button>
+      <button mat-flat-button class="btn-vakinha" (click)="ir(detalhe.donate_channels[0].mercadopago)"
+        *ngIf="detalhe.donate_channels[0]?.mercadopago">
+        MercadoPago
+      </button>
+      <button mat-flat-button class="btn-vakinha" (click)="ir(detalhe.donate_channels[0].paypal)"
+        *ngIf="detalhe.donate_channels[0]?.paypal">
+        PayPal
+      </button>
+      <button mat-flat-button class="btn-vakinha" (click)="ir(detalhe.donate_channels[0].recebeaqui)"
+        *ngIf="detalhe.donate_channels[0]?.recebeaqui">
+        RecebeAqui
+      </button>
+    </div>
+    <div class="col-12" *ngIf="detalhe.donate_channels[0]?.account_bank?.name_banking">
+      <div class="mat-mensagem center">
+        DEPÓSITO
+      </div>
+      <h2 class="mat-mensagem"> Banco: {{detalhe.donate_channels[0].account_bank.name_banking}}</h2>
+      <h2 class="mat-mensagem">Agência: {{detalhe.donate_channels[0].account_bank.agency}}</h2>
+      <h2 class="mat-mensagem"> Conta: {{detalhe.donate_channels[0].account_bank.account_number}}</h2>
+      <h2 class="mat-mensagem"> Tipo: {{detalhe.donate_channels[0].account_bank.account_type}}</h2>
+      <h2 class="mat-mensagem"> Nome: {{cortaPlavra(detalhe.donate_channels[0].account_bank.name_favored,25)}} (
+        {{detalhe.donate_channels[0].account_bank.cpf_cnpj}})</h2>
+    </div>
+
+  </div>
+</div>
+<div class="row painel">
+  <h2 class="mat-mensagem">AJUDAR COM PRODUTOS</h2>
+</div>
+<div class="row painel-i">
+  <div class="col-12">
+
+    <div *ngFor="let col of detalhe.type_donations">
+      <div class="mat-mensagem painel-i">
+        {{col}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row painel">
+  <h2 class="mat-mensagem">PONTOS DE COLETA</h2>
+</div>
+<div class="row painel-i">
+  <div class="col-12">
+    <h2 class="mat-mensagem"> {{cortaPlavra(detalhe.collect_spot,30)}}</h2>
+  </div>
+</div>

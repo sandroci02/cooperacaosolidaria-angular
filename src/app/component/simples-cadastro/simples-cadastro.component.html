@@ -1,0 +1,70 @@
+<div class="painel">
+  <h2 class="mat-mensagem-titulo">CADASTRO</h2>
+</div>
+
+<mat-card>  
+  <mat-card-content>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field>
+          <input matInput [(ngModel)]="data.primeiroNome" placeholder="Primeiro nome*">
+        </mat-form-field>
+        <mat-error *ngIf="vazio('primeiroNome')">
+          O primeiro nome é obrigatório
+        </mat-error>
+      </div>
+      <div class="col-6">
+        <mat-form-field>
+         <input  matInput [(ngModel)]="data.ultimoNome" placeholder="Último nome*">
+        </mat-form-field>
+        <mat-error *ngIf="vazio('ultimoNome')">
+          O último Nome é obrigatório
+        </mat-error>
+      </div>
+      <div class="col-12">
+        <mat-form-field>
+          <input matInput [(ngModel)]="data.email" placeholder="E-mail*">
+        </mat-form-field>
+        <mat-error *ngIf="vazio('email')">
+          O e-mail é obrigatório
+        </mat-error>
+      </div>
+      <div class="col-12">
+        <mat-form-field>
+          <input matInput [(ngModel)]="data.senha" type="password" placeholder="Senha*">
+        </mat-form-field>
+        <mat-error *ngIf="vazio('senha')">
+          A senha é obrigatório
+        </mat-error>
+      </div>
+      <div class="col-12">
+        <mat-form-field>
+          <input matInput [(ngModel)]="data.confirmarSenha" type="password" placeholder="Confirmar Senha*">
+        </mat-form-field>
+        <mat-error *ngIf="vazio('confirmarSenha')">
+          A confirmação é obrigatório
+        </mat-error>
+        <mat-error *ngIf="senhaValida()">
+          A confirmação deve ser igual a senha
+        </mat-error>
+      </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input [textMask]="cpf" matInput [(ngModel)]="data.cpf" placeholder="CPF*">
+          </mat-form-field>
+          <mat-error *ngIf="vazio('cpf')">
+            A CPF é obrigatório
+          </mat-error>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input   [textMask]="telefone" matInput [(ngModel)]="data.telefone" placeholder="Telefone*">
+          </mat-form-field>
+          <mat-error *ngIf="vazio('telefone')">
+            A telefone é obrigatório
+          </mat-error>
+        </div>
+    </div>    
+    <button id="criar_usuario" mat-button class="color-verde left-10" (click)="criar()">Criar Usuário</button>
+  </mat-card-content>
+</mat-card>

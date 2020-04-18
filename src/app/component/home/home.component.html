@@ -1,0 +1,87 @@
+<div class="row painel">
+  <div class="col-12">
+    <div class="mat-display-3 center">COLABORE COM AS AÇÕES DE AJUDA QUE ESTÃO OCORRENDO EM TODO O BRASIL</div>
+  </div>
+</div>
+
+<div class="row painel-i">
+  <div class="col-2"></div>
+  <div class="col-8">
+
+    <h2 class="mat-mensagem-titulo">Olá, que bom que você está aqui! </h2>
+    <div class="mat-mensagem">
+
+
+      <p>Muitas pessoas e famílias inteiras estão passando por dificuldades com as restrições impostas pela pandemia do
+        COVID-19. O isolamento social é necessário, mas com isso os empregos, atividades autônomas e informais são
+        afetados, impossibilitando muitos de ganhar o próprio sustento. Isso restringe seus acessos ao que há de mais
+        básico: alimentação e itens higiene.</p>
+
+      <p>Nesta página, reunimos algumas das iniciativas que estão ocorrendo aqui em Porto Alegre para ajudá-lo a doar
+        para quem mais necessita. </p>
+
+      <p>Este é um movimento de pessoas para pessoas! </p>
+
+      <p>Colabore e nos ajude a potencializar essa causa do bem! <3 </p>
+
+      <p>
+        E se quiser falar com a gente, mande um e-mail para <br>cooperacaosolidariacovid@gmail.com
+      </p>
+
+    </div>
+
+
+  </div>
+  <div class="col-2"></div>
+</div>
+
+<div class="row painel">
+</div>
+
+<div class="row painel-i">  
+  <div class="col-12">
+    <h2 class="mat-mensagem-titulo2 center">PESSOAS AJUDANDO PESSOAS</h2>
+
+    <img id="banner" src="assets\banner1.png" class="center">
+
+
+    <div class="mat-mensagem-titulo center">
+      <p>DOE DIRETAMENTE PARA QUEM MAIS PRECISA</p>
+    </div>
+  </div>  
+</div>
+<div class="row painel">
+</div>
+
+<div class="row painel">  
+  <div class="col-12">
+    <div class="mat-display-3 center">CAMPANHAS E AÇÕES DE <BR> ARRECADAÇÃO ABERTAS <BR> NESTE MOMENTO</div>
+  </div>  
+</div>
+
+<div class="row painel" *ngIf="loading">  
+  <div class="col-12">
+    <div class="mat-display-3 center">Carregando campanhas...</div>
+  </div>  
+</div>
+
+<div class="painel row" *ngIf="!loading">  
+  <div class="col-6" *ngFor="let col of campanhas">
+    <div class="row painel-i mouse campanha" (click)="ver(col)">
+      <div class="col-3">
+        <img src="assets\logo_100.png">
+        <div class="mat-small truncate"> {{col.assisted_entity}}</div>        
+        <div class="mat-small truncate"> {{col.city}} {{col.state}} </div>
+        <div class="mat-small truncate"> {{col.served_region}}</div>
+      </div>
+      <div class="col-9">
+        <h2 class="mat-mensagem-titulo truncate">{{col.campaign_name}} </h2>
+        <div class="mat-mensagem truncate">
+          {{col.description}}
+        </div>
+        <div *ngFor="let item of col.type_donations">
+          <div class="mat-small">{{item}} </div>
+        </div>
+      </div>
+    </div>
+  </div>

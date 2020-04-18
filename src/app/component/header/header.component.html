@@ -1,0 +1,66 @@
+<div class="row" id="header-mobile">
+    <div class="col-12 center">
+        <img src="assets\logo_font_58.png">
+        <div *ngIf="getLogado()">
+            <button mat-flat-button class="btn-header"> {{nome}} <mat-icon class="toolbar-icon mouse" (click)="logout()"
+                    title="sair">exit_to_app</mat-icon> </button>
+
+        </div>
+        <div *ngIf="!getLogado()">
+            <button mat-flat-button class="btn-header" (click)="login()">
+                LOGIN
+            </button>
+        </div>
+    </div>
+    <div class="col-12 center">
+        <button mat-flat-button class="btn-header" (click)="irHome()">
+            INICIO
+        </button>
+        <button mat-flat-button class="btn-header" (click)="irCampanha()">
+            CAMPANHA
+        </button>
+        <button mat-flat-button class="btn-header" (click)="irCadastro()">
+            CADASTRO
+        </button>
+    </div>   
+</div>
+
+
+<mat-grid-list cols="5" rowHeight="100px" id="header">
+    <mat-grid-tile [colspan]=1 [rowspan]="1">
+        <img src="assets\logo_font_58.png">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=1 [rowspan]="1">
+        <button mat-flat-button class="btn-header" (click)="irHome()">
+            INICIO
+        </button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=1 [rowspan]="1">
+        <button mat-flat-button class="btn-header" (click)="irCampanha()">
+            CRIAR CAMPANHA
+        </button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=1 [rowspan]="1">
+        <button mat-flat-button class="btn-header" (click)="irCadastro()">
+            CADASTRO
+        </button>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [colspan]=1 [rowspan]="1">
+
+        <div *ngIf="getLogado()">
+            <button mat-flat-button class="btn-header"> {{nome}} <mat-icon class="toolbar-icon mouse" (click)="logout()"
+                    title="sair">exit_to_app</mat-icon> </button>
+
+        </div>
+        <div *ngIf="!getLogado()">
+            <button mat-flat-button class="btn-header" (click)="login()">
+                LOGIN
+            </button>
+        </div>
+
+    </mat-grid-tile>
+
+
+</mat-grid-list>
