@@ -67,6 +67,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { SimplesCadastroComponent } from './component/simples-cadastro/simples-cadastro.component';
 
 import { TextMaskModule } from 'angular2-text-mask';
+import { UsrActivatedComponent } from './component/usr-activated/usr-activated.component';
 
 
 registerLocaleData(localePt, 'pt-BR');
@@ -84,7 +85,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 
 
 const routes: Routes = [
-  
+
   {
     path: '',
     component: HomeLayoutComponent,
@@ -102,6 +103,7 @@ const routes: Routes = [
         path: 'cadastro',
         component: SimplesCadastroComponent
       },
+
       /*{
         path: 'cadastro-voluntario',
         component: VoluntarioCadastroComponent
@@ -117,7 +119,7 @@ const routes: Routes = [
       {
         path: 'cadastro-campanha',
         component: CampanhaCadastroComponent
-      },       
+      },
     ]
   },
   {
@@ -127,6 +129,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'user-activated',
+        component: UsrActivatedComponent
       },
     ]
   },
@@ -148,6 +154,7 @@ const routes: Routes = [
     DetalheComponent,
     HeaderComponent,
     SimplesCadastroComponent,
+    UsrActivatedComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -198,7 +205,7 @@ const routes: Routes = [
     MatChipsModule,
     MatBadgeModule,
     MatRadioModule,
-    TextMaskModule 
+    TextMaskModule
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -208,8 +215,8 @@ const routes: Routes = [
     ApiService,
     MensagemService,
     MatDatepickerModule,
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, { provide: LOCALE_ID, useValue: 'pt-BR' }, 
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },    
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   entryComponents: [
     AguardeComponent,

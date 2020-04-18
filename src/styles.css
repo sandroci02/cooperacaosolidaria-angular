@@ -282,22 +282,26 @@ tbody {
 .mat-mensagem{
     font: 400 25px/32px Roboto,"Helvetica Neue",sans-serif;
     margin: 0 0 16px;
+    white-space: pre-line;
 }
 
 .mat-mensagem-titulo{
     font: 500 30px/32px Roboto,"Helvetica Neue",sans-serif;
     margin: 0 0 16px;
+    white-space: pre-line;
     }
  
 .mat-mensagem-titulo2{
     font: 600 40px/42px Roboto,"Helvetica Neue",sans-serif;
     margin: 0 0 16px;
+    white-space: pre-line;
 }
 
 .mat-display-3, .mat-typography .mat-display-3 {
     font: 400 56px/60px Roboto,"Helvetica Neue",sans-serif;
     margin: 0 0 64px;
     letter-spacing: -.02em;
+    white-space: pre-line;
 }
 .btn-vakinha{
     background-color: #FF7978;
@@ -318,8 +322,7 @@ tbody {
 .footer{    
     color: #fff;    
     background: #404040;    
-    height: 50px;
-    position: fixed;
+    height: 70px;    
     left: 0;
     bottom: 0;
     width: 100%;        
@@ -327,7 +330,7 @@ tbody {
 }
 
 .footer .mat-mensagem{
-    margin-top:12px;
+    padding-top:20px;
 }
 .truncate {
     white-space: nowrap;
@@ -388,7 +391,6 @@ tbody {
     height: 0px;
 }
 
-
 @media (max-width: 600px) {    
     .col-1,
     .col-2,
@@ -439,11 +441,7 @@ tbody {
     }   
     .footer {
         color: #fff;
-        background: #404040;
-        height: 50px;
-        position: fixed;
-        left: 0;
-        bottom: 0;
+        background: #404040;        
     }
     .footer .mat-mensagem {        
         font: 400 20px/25px Roboto,"Helvetica Neue",sans-serif;        
